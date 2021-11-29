@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import { NotesProvider } from './hooks/useNotes';
+
+
 
 ReactDOM.render(
-  <React.StrictMode>
+  <NotesProvider>
     <App />
-  </React.StrictMode>,
+  </NotesProvider>,
   document.getElementById('root')
 );
