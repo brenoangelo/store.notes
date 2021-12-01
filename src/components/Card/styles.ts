@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 
-import { BiTrashAlt } from 'react-icons/bi'
+import { BiTrashAlt, BiEditAlt } from 'react-icons/bi'
 
-export const Container = styled.div`
+interface ContainerProps{
+  isSelected: boolean;
+}
+
+export const Container = styled.a<ContainerProps>`
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,7 +16,7 @@ export const Container = styled.div`
   gap: 0.5rem;
   padding: 1rem;
 
-  border: 2px solid transparent;
+  border: 2px solid ${props => props.isSelected ? '#37FFCB' : 'transparent'};
   cursor: pointer;
 
   background: var(--light-yellow);
@@ -25,6 +29,16 @@ export const Container = styled.div`
     filter: brightness(0.97);
   }
 
+  h3{
+    position: relative;
+
+    &:hover {
+      svg{
+        opacity: 1;
+      }
+    }
+  }
+
   p {
     overflow: hidden;
     white-space: nowrap;
@@ -33,7 +47,7 @@ export const Container = styled.div`
   }
 `
 
-export const CloseButton = styled(BiTrashAlt)`
+export const TrashButton = styled(BiTrashAlt)`
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
@@ -43,5 +57,19 @@ export const CloseButton = styled(BiTrashAlt)`
 
   &:hover{
     color: var(--black);
+  }
+`
+
+export const EditButton = styled(BiEditAlt)`
+  position: absolute;
+  left: -30px;
+
+  color: #888;
+  opacity: 0;
+  transition: color, opacity 0.3s;
+
+  &:hover{
+    color: var(--black);
+    opacity: 1;
   }
 `

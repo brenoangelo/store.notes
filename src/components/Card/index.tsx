@@ -1,25 +1,30 @@
 import { useNotes } from "../../hooks/useNotes";
-import { CloseButton, Container } from "./styles";
+import { TrashButton, EditButton, Container } from "./styles";
 
 interface Note {
   id: number,
   title: string;
   content: string;
   createdAt: Date;
+  isSelected: boolean;
 }
 
-interface ICardProps {
+interface ICardProps{
   note: Note;
 }
 
-export function Card({note}: ICardProps) {
-  const { handleRmvNote } = useNotes()
+export function Card({ note, ...rest }: ICardProps) {
+  const { handleRmvNote, handleEditNote } = useNotes()
   return (
-    <Container>
-      <CloseButton
+    <Container {...rest} isSelected={note.isSelected}>
+      <TrashButton
         onClick={() => handleRmvNote(note.id)}
       />
-      <h3>{note.title}</h3>
+      
+      <h3>
+        <EditButton onClick={() => handleEditNote(note)}/> 
+        {note.title}
+      </h3>
       <small>{new Intl.DateTimeFormat('pt-BR').format(
         new Date(note.createdAt)
       )}</small>

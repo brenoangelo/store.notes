@@ -21,7 +21,10 @@ export function Aside() {
       <CardsContainer>
         { notes ?
           notes.map(note => (
-            <Card note={note}/>
+            <Card 
+              key={note.id}
+              note={note} 
+              />
           )) 
           : 
           ''

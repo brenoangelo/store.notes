@@ -5,6 +5,7 @@ type Note = {
   title: string;
   content: string;
   createdAt: Date;
+  isSelected: boolean;
 }
 
 interface NotesProviderProps {
@@ -15,6 +16,7 @@ interface NotesContextData {
   notes: Note[];
   handleAddNote: (note: Note) => void;
   handleRmvNote: (noteId: Number) => void;
+  handleEditNote: (noteElement: Note) => void;
 }
 
 const NotesContext = createContext<NotesContextData>({} as NotesContextData)
@@ -39,6 +41,26 @@ export function NotesProvider({ children }: NotesProviderProps){
     localStorage.setItem('@notes', JSON.stringify(notesUpdated))
   }
 
+  function handleEditNote(noteElement: Note) {
+    let notesUpdated = notes
+    let noteExists = notesUpdated.find(note => note.id === noteElement.id)
+    
+    if(!noteExists){
+      return;
+    }
+    const index = notesUpdated.findIndex(note => note.id === noteExists?.id)
+    noteExists = {...noteExists, isSelected: !noteExists.isSelected}
+    
+    notesUpdated.forEach(note => {
+      return note.isSelected = false
+    })
+    
+    notesUpdated.splice(index, 1, noteExists)
+    
+    localStorage.setItem('@notes', JSON.stringify(notesUpdated))
+    setNotes(notesUpdated)
+  }
+
   function handleRmvNote(noteId: Number) {
     const notesUpdated = notes
     const noteExists = notesUpdated.find(note => note.id === noteId)
@@ -54,7 +76,9 @@ export function NotesProvider({ children }: NotesProviderProps){
   }
 
   return (
-    <NotesContext.Provider value={{notes, handleAddNote, handleRmvNote}}>
+    <NotesContext.Provider 
+      value={{notes, handleAddNote, handleRmvNote, handleEditNote}}
+    >
       {children}
     </NotesContext.Provider>
   )
