@@ -1,5 +1,6 @@
+import { FormEvent } from "react";
 import { useNotes } from "../../hooks/useNotes";
-import { TrashButton, EditButton, Container } from "./styles";
+import { TrashButton, Container } from "./styles";
 
 interface Note {
   id: number,
@@ -11,20 +12,18 @@ interface Note {
 
 interface ICardProps{
   note: Note;
+  onClick: (event: FormEvent) => void;
 }
 
 export function Card({ note, ...rest }: ICardProps) {
-  const { handleRmvNote, handleEditNote } = useNotes()
+  const { handleRmvNote } = useNotes()
+  
   return (
     <Container {...rest} isSelected={note.isSelected}>
       <TrashButton
-        onClick={() => handleRmvNote(note.id)}
+        onClick={(event) => handleRmvNote(note.id, event)}
       />
-      
-      <h3>
-        <EditButton onClick={() => handleEditNote(note)}/> 
-        {note.title}
-      </h3>
+      <h3>{note.title}</h3>
       <small>{new Intl.DateTimeFormat('pt-BR').format(
         new Date(note.createdAt)
       )}</small>

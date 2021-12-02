@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react'
+import { createContext, FormEvent, ReactNode, useContext, useState } from 'react'
 
 type Note = {
   id: number;
@@ -15,7 +15,7 @@ interface NotesProviderProps {
 interface NotesContextData {
   notes: Note[];
   handleAddNote: (note: Note) => void;
-  handleRmvNote: (noteId: Number) => void;
+  handleRmvNote: (noteId: Number, event: FormEvent) => void;
   handleEditNote: (noteElement: Note) => void;
 }
 
@@ -31,6 +31,21 @@ export function NotesProvider({ children }: NotesProviderProps){
 
     return []
   })
+
+  function handleRmvNote(noteId: Number, event: FormEvent) {
+    event.stopPropagation()
+    const notesUpdated = notes
+    const noteExists = notesUpdated.find(note => note.id === noteId)
+
+    if(!noteExists) {
+      return;
+    }
+
+    const notesFiltered = notesUpdated.filter(note => note.id !== noteExists.id)
+    setNotes(notesFiltered)
+
+    localStorage.setItem('@notes', JSON.stringify(notesFiltered))
+  }
 
   function handleAddNote(note: Note) {
     let notesUpdated = notes
@@ -48,31 +63,18 @@ export function NotesProvider({ children }: NotesProviderProps){
     if(!noteExists){
       return;
     }
+
     const index = notesUpdated.findIndex(note => note.id === noteExists?.id)
     noteExists = {...noteExists, isSelected: !noteExists.isSelected}
     
     notesUpdated.forEach(note => {
-      return note.isSelected = false
+      note.isSelected = false
     })
     
     notesUpdated.splice(index, 1, noteExists)
-    
-    localStorage.setItem('@notes', JSON.stringify(notesUpdated))
     setNotes(notesUpdated)
-  }
-
-  function handleRmvNote(noteId: Number) {
-    const notesUpdated = notes
-    const noteExists = notesUpdated.find(note => note.id === noteId)
-
-    if(!noteExists) {
-      return;
-    }
-
-    const notesFiltered = notesUpdated.filter(note => note.id !== noteExists.id)
-    setNotes(notesFiltered)
-
-    localStorage.setItem('@notes', JSON.stringify(notesFiltered))
+    localStorage.setItem('@notes', JSON.stringify(notesUpdated))
+    console.log(notes)
   }
 
   return (

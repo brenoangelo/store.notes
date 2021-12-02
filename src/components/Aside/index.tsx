@@ -7,8 +7,8 @@ import { CardsContainer, Container } from "./styles";
 import { IoSearchOutline } from 'react-icons/io5'
 
 export function Aside() {
-  const { notes } = useNotes()
-
+  const { notes, handleEditNote } = useNotes()
+  
   return (
     <Container>
       <Input 
@@ -24,7 +24,8 @@ export function Aside() {
             <Card 
               key={note.id}
               note={note} 
-              />
+              onClick={() => handleEditNote(note)}
+            />
           )) 
           : 
           ''

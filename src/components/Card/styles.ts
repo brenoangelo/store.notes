@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { BiTrashAlt, BiEditAlt } from 'react-icons/bi'
+import { BiTrashAlt } from 'react-icons/bi'
 
 interface ContainerProps{
   isSelected: boolean;
@@ -60,16 +60,3 @@ export const TrashButton = styled(BiTrashAlt)`
   }
 `
 
-export const EditButton = styled(BiEditAlt)`
-  position: absolute;
-  left: -30px;
-
-  color: #888;
-  opacity: 0;
-  transition: color, opacity 0.3s;
-
-  &:hover{
-    color: var(--black);
-    opacity: 1;
-  }
-`

@@ -12,12 +12,23 @@ import { IoIosAddCircleOutline } from 'react-icons/io'
 import { useNotes } from "../../hooks/useNotes"
 
 export function NoteContent() {
-  const [title, setTitle] = useState('')
-  const [content, setContent] = useState('')
   const { handleAddNote, notes } = useNotes()
-
-  const noteSelected = notes.filter(note => note.isSelected === true)
-
+  const [title, setTitle] = useState(() => {
+    const noteSelected = notes.find(note => note.isSelected === true)
+    if(noteSelected?.isSelected){
+      return noteSelected?.title
+    }
+    return ''
+  })
+  const [content, setContent] = useState(() => {
+    const noteSelected = notes.find(note => note.isSelected === true)
+    if(noteSelected?.isSelected){
+      return noteSelected?.content
+    }
+    return ''
+  })
+  
+ 
   function handleCreateNote(event: FormEvent) {
     event.preventDefault()
 
