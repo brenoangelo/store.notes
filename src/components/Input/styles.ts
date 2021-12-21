@@ -5,6 +5,8 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
+  width: 100%;
+
   gap: 0.5rem;
 
   svg {
@@ -15,6 +17,8 @@ export const Container = styled.div`
     line-height: 2.5rem;
     font-size: 1.5rem;
     padding-left: 0.75rem;
+
+    width: 100%;
 
     border: 0;
 

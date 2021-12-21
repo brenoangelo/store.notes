@@ -1,12 +1,5 @@
 import { createContext, FormEvent, ReactNode, useContext, useState } from 'react'
-
-type Note = {
-  id: number;
-  title: string;
-  content: string;
-  createdAt: Date;
-  isSelected: boolean;
-}
+import { Note } from '../types';
 
 interface NotesProviderProps {
   children: ReactNode;
@@ -15,7 +8,7 @@ interface NotesProviderProps {
 interface NotesContextData {
   notes: Note[];
   handleAddNote: (note: Note) => void;
-  handleRmvNote: (noteId: Number, event: FormEvent) => void;
+  handleRmvNote: (noteId: Number | null, event: FormEvent) => void;
   handleEditNote: (noteElement: Note) => void;
 }
 
@@ -32,8 +25,13 @@ export function NotesProvider({ children }: NotesProviderProps){
     return []
   })
 
-  function handleRmvNote(noteId: Number, event: FormEvent) {
+  function handleRmvNote(noteId: Number | null, event: FormEvent) {
     event.stopPropagation()
+
+    if(!noteId){
+      return;
+    }
+    
     const notesUpdated = notes
     const noteExists = notesUpdated.find(note => note.id === noteId)
 
@@ -57,14 +55,20 @@ export function NotesProvider({ children }: NotesProviderProps){
   }
 
   function handleEditNote(noteElement: Note) {
-    let notesUpdated = notes
+    
+    let notesUpdated = [...notes]
     let noteExists = notesUpdated.find(note => note.id === noteElement.id)
     
     if(!noteExists){
       return;
     }
 
-    const index = notesUpdated.findIndex(note => note.id === noteExists?.id)
+    if(noteExists.content !== noteElement.content
+      || noteExists.title !== noteElement.title){
+      noteExists = noteElement
+    }
+
+    const index = notesUpdated.findIndex(note => note.id === noteElement.id)
     noteExists = {...noteExists, isSelected: !noteExists.isSelected}
     
     notesUpdated.forEach(note => {
@@ -74,7 +78,6 @@ export function NotesProvider({ children }: NotesProviderProps){
     notesUpdated.splice(index, 1, noteExists)
     setNotes(notesUpdated)
     localStorage.setItem('@notes', JSON.stringify(notesUpdated))
-    console.log(notes)
   }
 
   return (

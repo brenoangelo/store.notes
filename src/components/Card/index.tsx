@@ -1,15 +1,7 @@
 import { FormEvent } from "react";
 import { useNotes } from "../../hooks/useNotes";
+import { Note } from "../../types";
 import { TrashButton, Container } from "./styles";
-
-interface Note {
-  id: number,
-  title: string;
-  content: string;
-  createdAt: Date;
-  isSelected: boolean;
-}
-
 interface ICardProps{
   note: Note;
   onClick: (event: FormEvent) => void;

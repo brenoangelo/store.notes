@@ -16,6 +16,7 @@ export const Container = styled.form`
 
 export const Header = styled.header`
   display: flex;
+  width: 100%;
 `
 
 export const ButtonAdd = styled.button`
