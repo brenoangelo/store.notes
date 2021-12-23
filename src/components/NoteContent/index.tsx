@@ -41,6 +41,14 @@ export function NoteContent() {
   function handleCreateNote(event: FormEvent) {
     event.preventDefault()
 
+    if(cardData.title.trim() === ""){
+      return;
+    }
+
+    if(cardData.content.trim() === ""){
+      return;
+    }
+
     handleAddNote({
       id: Date.now(),
       title: cardData.title,
@@ -54,6 +62,14 @@ export function NoteContent() {
     event.preventDefault()
     
     if(!cardData.id){
+      return;
+    }
+
+    if(cardData.title.trim() === ""){
+      return;
+    }
+
+    if(cardData.content.trim() === ""){
       return;
     }
     

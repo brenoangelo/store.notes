@@ -7,6 +7,7 @@ import { GlobalStyle } from './styles/global'
 function App() {
   return (
     <div className="App">
+      <h1>PostIt</h1>
       <Aside />
       <NoteContent />
       <GlobalStyle />

@@ -4,7 +4,7 @@ export const GlobalStyle = createGlobalStyle`
 
   :root {
     --light-yellow: #F5F8CE;
-    --green: #37FFCB;
+    --green: #43506E;
     --black: #04020F;
     --white: #F2F2F2;
   }
@@ -61,5 +61,16 @@ export const GlobalStyle = createGlobalStyle`
     
     margin: 0 auto;
     padding: 0 15px;
+
+    > h1 {
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--light-yellow);
+      padding: 0.5rem;
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      
+    }
   }
 `

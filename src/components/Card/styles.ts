@@ -15,8 +15,10 @@ export const Container = styled.a<ContainerProps>`
 
   gap: 0.5rem;
   padding: 1rem;
+  min-width: 16rem;
+  max-width: 16rem;
 
-  border: 2px solid ${props => props.isSelected ? '#37FFCB' : 'transparent'};
+  border: 2px solid ${props => props.isSelected ? '#43506E' : 'transparent'};
   cursor: pointer;
 
   background: var(--light-yellow);

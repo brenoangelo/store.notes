@@ -22,6 +22,28 @@ export const Container = styled.aside`
 export const CardsContainer = styled.div`
   overflow-y: auto;
   max-height: 35rem;
+  min-height: 35rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  figure{
+    flex: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img{
+      max-width: 15rem;
+    }
+
+    figcaption{
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
 
   &::-webkit-scrollbar {
     width: 10px;
