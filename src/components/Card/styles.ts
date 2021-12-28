@@ -26,6 +26,9 @@ export const Container = styled.a<ContainerProps>`
 
   transition: border, filter 0.3s;
 
+  -webkit-box-shadow: 0px 17px 21px -6px rgba(0,0,0,0.05); 
+  box-shadow: 0px 17px 21px -6px rgba(0,0,0,0.05);
+
   &:hover {
     border-color: var(--green);
     filter: brightness(0.97);

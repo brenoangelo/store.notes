@@ -41,14 +41,6 @@ export function NoteContent() {
   function handleCreateNote(event: FormEvent) {
     event.preventDefault()
 
-    if(cardData.title.trim() === ""){
-      return;
-    }
-
-    if(cardData.content.trim() === ""){
-      return;
-    }
-
     handleAddNote({
       id: Date.now(),
       title: cardData.title,
@@ -60,18 +52,6 @@ export function NoteContent() {
 
   function handleModifyNote(event: FormEvent, cardData: CardData) {
     event.preventDefault()
-    
-    if(!cardData.id){
-      return;
-    }
-
-    if(cardData.title.trim() === ""){
-      return;
-    }
-
-    if(cardData.content.trim() === ""){
-      return;
-    }
     
     const cardDataUpdated = {
       id: cardData.id,
@@ -90,7 +70,7 @@ export function NoteContent() {
         
         <Input 
           name="title" 
-          placeholder="Informe o titulo"
+          placeholder="title"
           type="text"
           onChange={e => setCardData({...cardData, title: e.target.value})}
           value={cardData.title}
@@ -116,7 +96,7 @@ export function NoteContent() {
       <MainContent>
         <TextArea 
           name="conteudo"
-          placeholder="conteudo..."
+          placeholder="content"
           onChange={e => setCardData({...cardData, content: e.target.value})}
           value={cardData.content}
         />

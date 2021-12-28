@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components'
+import 'react-toastify/dist/ReactToastify.css'
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -71,6 +72,39 @@ export const GlobalStyle = createGlobalStyle`
       top: 1rem;
       left: 1rem;
       
+    }
+  }
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+  background: var(--light-yellow);     
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--light-yellow);    
+    border-radius: 20px;  
+    border: 1px solid rgba(0,0,0, 0.3);
+  }
+
+  a#github{
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+
+    position: absolute;
+    bottom: 2.5rem;
+
+    font-size: 1.25rem;
+    color: #fff;
+    text-decoration: none;
+
+    transition: color 0.3s;
+
+    &:hover {
+      color: var(--light-yellow);;
     }
   }
 `

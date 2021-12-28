@@ -16,6 +16,7 @@ export const Container = styled.div`
   input {
     line-height: 2.5rem;
     font-size: 1.5rem;
+    font-weight: bold;
     padding-left: 0.75rem;
 
     width: 100%;

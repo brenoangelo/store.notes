@@ -44,19 +44,4 @@ export const CardsContainer = styled.div`
       font-weight: 600;
     }
   }
-
-  &::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-  background: var(--light-yellow);     
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: var(--light-yellow);    
-    border-radius: 20px;  
-    border: 1px solid rgba(0,0,0, 0.3);
-  }
-
 `
